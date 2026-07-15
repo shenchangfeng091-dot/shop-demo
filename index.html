@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>潮物集市 — 发现好物</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- 顶部公告栏 -->
+<div class="topbar">
+    <p>🎉 全场满 ¥199 包邮 · 新用户立减 ¥30 · 限时3天</p>
+</div>
+
+<!-- 导航栏 -->
+<header class="header">
+    <div class="header-inner">
+        <div class="logo">
+            <span class="logo-icon">🛍️</span>
+            <span class="logo-text">潮物集市</span>
+        </div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="搜索你想要的好物..." oninput="handleSearch()">
+            <button class="search-btn">🔍</button>
+        </div>
+        <div class="header-actions">
+            <div class="cart-btn" onclick="toggleCart()">
+                <span class="cart-icon">🛒</span>
+                <span class="cart-badge" id="cartBadge">0</span>
+            </div>
+        </div>
+    </div>
+    <!-- 分类导航 -->
+    <nav class="categories">
+        <div class="categories-inner">
+            <a class="cat-item active" onclick="filterCategory('all', this)">全部好物</a>
+            <a class="cat-item" onclick="filterCategory('数码', this)">📱 数码电子</a>
+            <a class="cat-item" onclick="filterCategory('服饰', this)">👕 服饰穿搭</a>
+            <a class="cat-item" onclick="filterCategory('家居', this)">🏠 家居生活</a>
+            <a class="cat-item" onclick="filterCategory('美妆', this)">💄 美妆护肤</a>
+            <a class="cat-item" onclick="filterCategory('运动', this)">⚽ 运动户外</a>
+            <a class="cat-item" onclick="filterCategory('食品', this)">🍜 美食零食</a>
+        </div>
+    </nav>
+</header>
+
+<!-- Hero 轮播 -->
+<section class="hero">
+    <div class="hero-slide active" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+        <div class="hero-content">
+            <h1>夏日清凉节</h1>
+            <p>精选好物 · 限时特惠 · 低至5折</p>
+            <button class="hero-btn" onclick="scrollToProducts()">立即抢购</button>
+        </div>
+        <div class="hero-emoji">🌞</div>
+    </div>
+</section>
+
+<!-- 商品列表 -->
+<main class="main" id="productsSection">
+    <div class="section-header">
+        <h2 id="sectionTitle">🔥 热门好物</h2>
+        <div class="sort-bar">
+            <span>排序：</span>
+            <a class="sort-item active" onclick="sortProducts('default', this)">综合</a>
+            <a class="sort-item" onclick="sortProducts('price-asc', this)">价格↑</a>
+            <a class="sort-item" onclick="sortProducts('price-desc', this)">价格↓</a>
+            <a class="sort-item" onclick="sortProducts('sales', this)">销量</a>
+        </div>
+    </div>
+    <div class="product-grid" id="productGrid">
+        <!-- 商品卡片由 JS 动态生成 -->
+    </div>
+</main>
+
+<!-- 购物车侧边栏 -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+        <h3>🛒 我的购物车</h3>
+        <button class="cart-close" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+        <div class="cart-empty">
+            <span class="empty-icon">🛒</span>
+            <p>购物车还是空的</p>
+            <span>快去挑选心仪的好物吧～</span>
+        </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+        <div class="cart-summary">
+            <span>共 <strong id="cartCount">0</strong> 件商品</span>
+            <span class="cart-total">合计: <strong id="cartTotal">¥0</strong></span>
+        </div>
+        <button class="checkout-btn" onclick="checkout()">去结算</button>
+    </div>
+</aside>
+
+<!-- 商品详情弹窗 -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal" id="productModal" onclick="event.stopPropagation()">
+        <!-- 弹窗内容由 JS 生成 -->
+    </div>
+</div>
+
+<!-- 页脚 -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-col">
+            <h4>🛍️ 潮物集市</h4>
+            <p>发现好物，分享生活。这是一个演示用购物网站 Demo。</p>
+        </div>
+        <div class="footer-col">
+            <h4>购物指南</h4>
+            <ul>
+                <li>购物流程</li>
+                <li>会员介绍</li>
+                <li>常见问题</li>
+                <li>联系客服</li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>配送方式</h4>
+            <ul>
+                <li>上门自提</li>
+                <li>211限时达</li>
+                <li>配送服务</li>
+                <li>运费标准</li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>关于我们</h4>
+            <ul>
+                <li>关于潮物</li>
+                <li>加入我们</li>
+                <li>隐私政策</li>
+                <li>用户协议</li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 潮物集市 · Demo by WorkBuddy · 仅供演示使用</p>
+    </div>
+</footer>
+
+<!-- Toast 提示 -->
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
